@@ -6,7 +6,7 @@ cache:
     - node_modules
 
 before_deploy:
-  - "yarn run build"
+  - "yarn build"
 
 deploy:
   provider: pages
