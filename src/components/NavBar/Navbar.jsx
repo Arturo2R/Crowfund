@@ -12,7 +12,7 @@ const Navbar = () => {
             <img src={Logo} alt="Crowfund" id="logo" />
           </Link>
         </div>
-        <ul className="space-x-10 text-white hidden md:flex">
+        <ul className="space-x-10  text-white hidden md:flex">
           <Link to="about">About</Link>
           <Link to="discover">Discover</Link>
           <Link to="get-started">Get Started</Link>
