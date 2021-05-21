@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "cross-env NODE_ENV=production vite build"
+    "build": "cross-env NODE_ENV=production vite build",
+    "test": "echo doing the Testes 😉"
   },
   "dependencies": {
     "@headlessui/react": "^1.1.1",
