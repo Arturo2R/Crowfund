@@ -10,7 +10,10 @@ export default function MyModal(props) {
   const { data, error, isLoading, isSuccess } = useGetRewards();
 
   const [open, setOpen] = React.useState(false);
+
   const cancelButtonRef = React.useRef();
+
+  console.log(data)
 
   function closeModal() {
     setOpen(false);
@@ -23,7 +26,7 @@ export default function MyModal(props) {
   return (
     <>
       <div onClick={openModal} className="">
-        <Button text="Back this project" />
+        <Button text={props.text} />
       </div>
       <Transition show={open} as={React.Fragment}>
         <Dialog
@@ -34,7 +37,7 @@ export default function MyModal(props) {
           open={open}
           onClose={closeModal}
         >
-          <div className="min-h-screen  md:px-4 text-center">
+          <div className="min-h-screen text-center md:px-4">
             <Transition.Child
               as={React.Fragment}
               enter="ease-out duration-300"
@@ -70,13 +73,13 @@ export default function MyModal(props) {
                 >
                   {props.titulo}
                 </Dialog.Title>
-                <div className="mt-4 my-8">
+                <div className="my-8 mt-4">
                   <p className="text-base font-medium text-gray-500">
                     {props.description}
                   </p>
                 </div>
 
-                <div className="space-y-3 flex">
+                <div className="flex space-y-3">
                   <form action="" className="space-y-4">
                     {error && <h1>Something went wrong!</h1>}
                     {isLoading && <h1>Loading...</h1>}
@@ -90,6 +93,7 @@ export default function MyModal(props) {
                           description={item.description}
                           disabled={item.agotado}
                           key={item.id}
+                          selected={item.id === props.selected ? true : false}
                           value="lala"
                           closeFunction={closeModal}
                         />
@@ -127,7 +131,7 @@ export default function MyModal(props) {
                 <div className="mt-4">
                   <button
                     type="button"
-                    className="absolute top-5 right-9 px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+                    className="absolute px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md top-5 right-9 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
                     onClick={closeModal}
                   >
                     <img src={Close} alt="cerrar" />

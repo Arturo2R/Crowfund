@@ -8,9 +8,9 @@ const AboutSection = (props) => {
 
   return (
     <BoxContainer>
-      <div className="space-y-3 flex flex-col">
-        <h2 className="font-semibold text-xl">About this project</h2>
-        <div className="text-gray-400 mb-10">
+      <div className="flex flex-col space-y-3">
+        <h2 className="text-xl font-semibold">About this project</h2>
+        <div className="mb-10 text-gray-400">
           <p>
             The mastercraft bamboo Riser is a sturdy and stylish that elevates
             your screen to a more comfortable viewing high. Placing your monitor
@@ -18,7 +18,7 @@ const AboutSection = (props) => {
             more comfortable while at work, helping you stay focused on the task
             at hand.
           </p>
-          <p className="mb-10 mt-8">
+          <p className="mt-8 mb-10">
             Featuring artisan craftmanship, the simplicity of design creates
             extra desk space below your computer to allow notepads, pens and USB
             sticks to be stored under the stand
@@ -37,6 +37,7 @@ const AboutSection = (props) => {
               description={item.description}
               disabled={item.agotado}
               key={item.id}
+              id={item.id}
             />
           ))}
       </div>

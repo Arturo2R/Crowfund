@@ -6,7 +6,7 @@ import Submit from "./Submit";
 import ThanksModal from "./ThanksModal";
 
 const CardOfModal = (props) => {
-  const [select, setSelect] = useState(false);
+  const [select, setSelect] = useState(props.selected);
 
   const handleSelect = (event) => {
     setSelect(!select);
@@ -20,9 +20,8 @@ const CardOfModal = (props) => {
   };
   return (
     <div
-      className={`w-100 rounded-lg shadow p-6 ${
-        select && "border-4 border-green-400"
-      }`}
+      className={`w-100 rounded-lg shadow p-6 ${select && "border-4 border-green-400"
+        }`}
       onClick={!props.disabled && handleSelect}
     >
       <div className={props.disabled ? "flex mb-4 opacity-50" : "flex mb-4"}>
@@ -30,9 +29,9 @@ const CardOfModal = (props) => {
           <input type="radio" value={props.value} checked={select} />
         </div>
         <div className="flex flex-col space-y-2">
-          <div className="flex  justify-between mb-4">
+          <div className="flex justify-between mb-4">
             <div className="flex flex-col md:flex-row cerca md:space-x-4">
-              <h6 className="font-bold text-lg hover:text-green-400 ">
+              <h6 className="text-lg font-bold hover:text-green-400 ">
                 {props.title}
               </h6>
               {props.pledgeQuantity > 0 && (
@@ -50,13 +49,13 @@ const CardOfModal = (props) => {
       </div>
 
       {select && (
-        <div className="mt-8 w-full items-center" onClick={nada}>
+        <div className="items-center w-full mt-8" onClick={nada}>
           <hr />
-          <div className="flex flex-col md:flex-row md:justify-between mt-4">
-            <div className=" mx-auto md:mx-0 md:my-auto">
+          <div className="flex flex-col mt-4 md:flex-row md:justify-between">
+            <div className="mx-auto md:mx-0 md:my-auto">
               <p>Enter your pledge:</p>
             </div>
-            <div className="flex w-full md:w-auto justify-around md:space-x-2 mt-4 md:mt-0">
+            <div className="flex justify-around w-full mt-4 md:w-auto md:space-x-2 md:mt-0">
               <Input placeholder={props.pledgeQuantity} />
               <ThanksModal>
                 <Submit text="Continue" onClick={handleClick}></Submit>
