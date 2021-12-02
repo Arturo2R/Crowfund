@@ -12,7 +12,11 @@ const Button = (props) => {
   }
 
   return (
-    <button title={props.text} className={classes}>
+    <button
+      type={props.modal ? "submit" : "button"}
+      title={props.text}
+      className={classes}
+    >
       {props.text}
     </button>
   );

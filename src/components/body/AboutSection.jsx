@@ -1,8 +1,11 @@
 import React from "react";
 import BoxContainer from "./BoxContainer";
 import Card from "./Card";
+import { useGetRewards } from "../../hooks/useRequest";
 
-const AboutSection = () => {
+const AboutSection = (props) => {
+  const { data, error, isLoading, isSuccess } = useGetRewards();
+
   return (
     <BoxContainer>
       <div className="space-y-3 flex flex-col">
@@ -22,25 +25,20 @@ const AboutSection = () => {
           </p>
         </div>
 
-        <Card
-          title="Bamboo Stand"
-          pledge="25"
-          availability="101"
-          description="You get an ergonomic stand od natural bamboo. You've hekped us launch or promotional ccampaign, and you'll be added to a special Backer member list"
-        />
-        <Card
-          title="Black Edition Stand"
-          pledge="75"
-          availability="64"
-          description="You get a Black Special Edition computer stand and a personal thank you. You'll be added to our Backer member list. Shipping included"
-        />
-        <Card
-          disabled
-          title="Mahogany"
-          pledge="200"
-          availability="0"
-          description="You get two Special Edition Mahogany stands, a Backer T-shirt, and a personal thank you. You'll be addeed to out backer member list. Shipping i included"
-        />
+        {error && <h1>Something went wrong!</h1>}
+        {isLoading && <h1>Loading...</h1>}
+
+        {isSuccess &&
+          data.map((item) => (
+            <Card
+              title={item.name}
+              pledge={item.minimunPledge}
+              availability={item.quantityLeft}
+              description={item.description}
+              disabled={item.agotado}
+              key={item.id}
+            />
+          ))}
       </div>
     </BoxContainer>
   );

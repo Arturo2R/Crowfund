@@ -1,11 +1,14 @@
 import { Dialog, Transition } from "@headlessui/react";
 import React from "react";
+import { useGetRewards } from "../../hooks/useRequest";
 import Button from "../Button";
 import CardOfModal from "./CardOfModal";
 // @ts-ignore
 import Close from "/src/images/icon-close-modal.svg";
 
 export default function MyModal(props) {
+  const { data, error, isLoading, isSuccess } = useGetRewards();
+
   const [open, setOpen] = React.useState(false);
   const cancelButtonRef = React.useRef();
 
@@ -75,7 +78,24 @@ export default function MyModal(props) {
 
                 <div className="space-y-3 flex">
                   <form action="" className="space-y-4">
-                    <CardOfModal
+                    {error && <h1>Something went wrong!</h1>}
+                    {isLoading && <h1>Loading...</h1>}
+
+                    {isSuccess &&
+                      data.map((item) => (
+                        <CardOfModal
+                          title={item.name}
+                          pledgeQuantity={item.minimunPledge}
+                          availability={item.quantityLeft}
+                          description={item.description}
+                          disabled={item.agotado}
+                          key={item.id}
+                          value="lala"
+                          closeFunction={closeModal}
+                        />
+                      ))}
+
+                    {/* <CardOfModal
                       title="Pledge With No Reward"
                       value="no-reward"
                       description="Lorem, ipsum dolor sit amet consectetur adipisicing elit.Repellat repellendus dolorum sequi nisi vel voluptatessuscipit iste nesciunt ut, quaerat, maxime, quisquam eumvoluptatum amet maiores ipsa obcaecati. Praesentium,voluptatem?"
@@ -100,7 +120,7 @@ export default function MyModal(props) {
                       availability="0"
                       description="You get two special edition Mahogany stands, a Backer T-shirt, and a personal thank you. You will be added to our Backer member list. Shipping is included"
                       disabled
-                    />
+                    /> */}
                   </form>
                 </div>
 

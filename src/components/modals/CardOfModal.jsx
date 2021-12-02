@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Quantity } from "../body/Quantity";
 import Button from "../Button";
+import { Input } from "./Input";
+import Submit from "./Submit";
 import ThanksModal from "./ThanksModal";
 
 const CardOfModal = (props) => {
@@ -11,6 +13,10 @@ const CardOfModal = (props) => {
   };
   const nada = (e) => {
     e.stopPropagation();
+  };
+  const handleClick = (event) => {
+    event.preventDefault();
+    props.closeFunction();
   };
   return (
     <div
@@ -29,7 +35,7 @@ const CardOfModal = (props) => {
               <h6 className="font-bold text-lg hover:text-green-400 ">
                 {props.title}
               </h6>
-              {props.pledgeQuantity && (
+              {props.pledgeQuantity > 0 && (
                 <p className="text-green-400">
                   Pledge ${props.pledgeQuantity} or more
                 </p>
@@ -51,19 +57,10 @@ const CardOfModal = (props) => {
               <p>Enter your pledge:</p>
             </div>
             <div className="flex w-full md:w-auto justify-around md:space-x-2 mt-4 md:mt-0">
-              <div className="flex  bg-white border-gray-300 border-2 text-blackw-auto font-semibold rounded-full py-4 px-8">
-                <p>$</p>
-                <input
-                  id="nose"
-                  name="pledge"
-                  type="number"
-                  placeholder="25"
-                  className="w-12"
-                  required
-                ></input>
-              </div>
-
-              <Button text="Continue"></Button>
+              <Input placeholder={props.pledgeQuantity} />
+              <ThanksModal>
+                <Submit text="Continue" onClick={handleClick}></Submit>
+              </ThanksModal>
             </div>
           </div>
         </div>
